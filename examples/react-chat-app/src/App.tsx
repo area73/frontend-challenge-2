@@ -156,7 +156,6 @@ function scrollBottom(container: HTMLElement | null) {
     container.scrollTo({
       top: container.scrollHeight,
       behavior: "smooth",
-      x,
     });
   }
 }
