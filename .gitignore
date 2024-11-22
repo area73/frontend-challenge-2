@@ -1,16 +1,24 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# OSX
-.DS_STORE
+node_modules
+dist
+dist-ssr
+*.local
 
-# Static
-
-# Node
-node_modules/
-npm-debug.log
-package-lock.json*
-
-# Tests
-coverage/
-
-# VS Code
-.vs
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
