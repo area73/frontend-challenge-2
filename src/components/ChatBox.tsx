@@ -7,7 +7,7 @@ interface ChatBoxProps {
   messages: ChatMessage[];
   input: string;
   onInputChange: (value: string) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.SyntheticEvent) => void;
 }
 
 export const ChatBox: React.FC<ChatBoxProps> = ({

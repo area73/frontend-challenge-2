@@ -3,7 +3,7 @@ import React from "react";
 export interface InputBoxProps {
   value: string;
   onChange: (value: string) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.SyntheticEvent) => void;
 }
 
 export const InputBox: React.FC<InputBoxProps> = ({
@@ -11,6 +11,7 @@ export const InputBox: React.FC<InputBoxProps> = ({
   onChange,
   onSubmit,
 }) => {
+  // onKeyUp={(e) => e.key === "Enter" && onSubmit}
   return (
     <div className="flex items-center p-4 bg-gray-800">
       <input
@@ -19,7 +20,12 @@ export const InputBox: React.FC<InputBoxProps> = ({
         onChange={(e) => onChange(e.target.value)}
         className="flex-1 p-2 rounded-md bg-gray-600 text-white border-none outline-none"
         placeholder="Escribe un mensaje..."
-        onKeyUp={(e) => e.key === "Enter" && onSubmit()}
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            onSubmit(e);
+          }
+        }}
       />
       <button
         onClick={onSubmit}
