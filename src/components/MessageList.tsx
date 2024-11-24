@@ -1,4 +1,4 @@
-import type { ChatMessage } from '../containers/ChatContainer';
+import type { ChatMessage } from '../types/components';
 import { Message } from './Message';
 
 export const MessageList = ({ messages }: { messages: ChatMessage[] }) => {

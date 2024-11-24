@@ -5,7 +5,7 @@ import { ChatContainer } from './ChatContainer';
 import type { ChatMessage } from '../types/components';
 
 import Core from '@landbot/core';
-import type { ChatBoxProps } from '../components/ChatBox';
+import type { ChatBoxProps } from '../types/components';
 import { CHAT_CONFIG_URL } from '../services/chatService';
 
 vi.mock('@landbot/core');

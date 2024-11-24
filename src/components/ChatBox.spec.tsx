@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { ChatBox } from './ChatBox';
-import type { ChatMessage } from '../containers/ChatContainer';
+import type { ChatMessage } from '../types/components';
 
 describe('ChatBox', () => {
   const mockMessages: ChatMessage[] = [

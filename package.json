@@ -12,7 +12,8 @@
     "lint:fix": "eslint --fix .",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,json}\""
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,json}\"",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@landbot/core": "^2.7.0",
