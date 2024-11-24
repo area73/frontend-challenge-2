@@ -1,26 +1,26 @@
-import { useState, useRef, useCallback } from "react";
-import { ChatBox } from "../components/ChatBox";
-import Core from "@landbot/core";
-import type { Message } from "postcss";
-import { useEffectOnce } from "../hooks/useEffectOnces";
+import { useState, useRef, useCallback } from 'react';
+import { ChatBox } from '../components/ChatBox';
+import Core from '@landbot/core';
+import type { Message } from 'postcss';
+import { useEffectOnce } from '../hooks/useEffectOnces';
 
 export interface ChatMessage {
   key: string;
   text?: string;
-  author: "bot" | "user";
+  author: 'bot' | 'user';
   timestamp: number;
   type: string;
 }
 
 const ChatContainer = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const core = useRef<Core | null>(null);
 
   useEffectOnce(() => {
     const fetchConfig = async () => {
       const response = await fetch(
-        "https://chats.landbot.io/u/H-441480-B0Q96FP58V53BJ2J/index.json"
+        'https://chats.landbot.io/u/H-441480-B0Q96FP58V53BJ2J/index.json'
       );
       const config = await response.json();
       core.current = new Core(config);
@@ -39,7 +39,7 @@ const ChatContainer = () => {
   const handleSubmit = useCallback(() => {
     if (input.trim() && core.current) {
       core.current.sendMessage({ message: input });
-      setInput("");
+      setInput('');
     }
   }, [input]);
 
@@ -57,7 +57,7 @@ function parseMessage(data: Message): ChatMessage {
   return {
     key: data.key,
     text: data.title || data.message,
-    author: data.samurai ? "bot" : "user",
+    author: data.samurai ? 'bot' : 'user',
     timestamp: data.timestamp,
     type: data.type,
   };

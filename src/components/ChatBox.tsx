@@ -1,9 +1,9 @@
-import React from "react";
-import { MessageList } from "./MessageList";
-import { InputBox } from "./InputBox";
-import type { ChatMessage } from "../containers/ChatContainer";
+import React from 'react';
+import { MessageList } from './MessageList';
+import { InputBox } from './InputBox';
+import type { ChatMessage } from '../containers/ChatContainer';
 
-interface ChatBoxProps {
+export interface ChatBoxProps {
   messages: ChatMessage[];
   input: string;
   onInputChange: (value: string) => void;
@@ -17,7 +17,10 @@ export const ChatBox: React.FC<ChatBoxProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="flex flex-col w-full h-full bg-gray-900 rounded-lg shadow-md">
+    <div
+      className="flex flex-col w-full h-full bg-gray-900 rounded-lg shadow-md"
+      role="form"
+    >
       <div className="p-4 bg-gray-800 rounded-t-lg">
         <h1 className="text-lg text-white font-bold">Landbot Chat</h1>
       </div>
