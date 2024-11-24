@@ -1,7 +1,4 @@
-export interface MessageProps {
-  text?: string;
-  author: string;
-}
+import type { MessageProps } from '../types/components';
 
 export const Message = ({ text, author }: MessageProps) => {
   const isBot = author === 'bot';

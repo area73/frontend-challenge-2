@@ -1,14 +1,7 @@
 import React from 'react';
 import { MessageList } from './MessageList';
 import { InputBox } from './InputBox';
-import type { ChatMessage } from '../containers/ChatContainer';
-
-export interface ChatBoxProps {
-  messages: ChatMessage[];
-  input: string;
-  onInputChange: (value: string) => void;
-  onSubmit: (event: React.SyntheticEvent) => void;
-}
+import type { ChatBoxProps } from '../types/components';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({
   messages,

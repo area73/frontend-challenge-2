@@ -4,16 +4,9 @@ import Core from '@landbot/core';
 import type { Message } from 'postcss';
 import { useEffectOnce } from '../hooks/useEffectOnces';
 import { fetchChatConfig } from '../services/chatService';
+import type { ChatMessage } from '../types/components';
 
-export interface ChatMessage {
-  key: string;
-  text?: string;
-  author: 'bot' | 'user';
-  timestamp: number;
-  type: string;
-}
-
-const ChatContainer = () => {
+export const ChatContainer = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const core = useRef<Core | null>(null);
@@ -62,5 +55,3 @@ function parseMessage(data: Message): ChatMessage {
     type: data.type,
   };
 }
-
-export default ChatContainer;

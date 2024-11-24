@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import ChatContainer, { type ChatMessage } from './ChatContainer';
+import { ChatContainer } from './ChatContainer';
+import type { ChatMessage } from '../types/components';
 
 import Core from '@landbot/core';
 import type { ChatBoxProps } from '../components/ChatBox';

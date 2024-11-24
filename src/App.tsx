@@ -1,4 +1,4 @@
-import ChatContainer from './containers/ChatContainer';
+import { ChatContainer } from './containers/ChatContainer';
 
 export const App = () => {
   return (

@@ -1,8 +1,5 @@
 import { useEffect, useRef } from 'react';
-
-interface EffectCallback {
-  (): void;
-}
+import type { EffectCallback } from '../types/hooks';
 
 /**
  * @desription Custom hook that ensures the effect runs only once, even if we use

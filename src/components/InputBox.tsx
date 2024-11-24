@@ -1,10 +1,5 @@
 import React from 'react';
-
-export interface InputBoxProps {
-  value: string;
-  onChange: (value: string) => void;
-  onSubmit: (event: React.SyntheticEvent) => void;
-}
+import type { InputBoxProps } from '../types/components';
 
 export const InputBox: React.FC<InputBoxProps> = ({
   value,
