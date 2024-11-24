@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { describe, it, expect, vi, type Mock } from 'vitest';
 import ChatContainer from './ChatContainer';
 
 import Core from '@landbot/core';
@@ -30,23 +30,6 @@ vi.mock('../components/ChatBox', () => ({
 }));
 
 describe('ChatContainer', () => {
-  const mockMessages = [
-    {
-      key: '1',
-      text: 'Hello',
-      author: 'user',
-      timestamp: 1732367400,
-      type: 'text',
-    },
-    {
-      key: '2',
-      text: 'Hi there!',
-      author: 'bot',
-      timestamp: 1732334377,
-      type: 'text',
-    },
-  ];
-
   it('renders ChatBox component', () => {
     render(<ChatContainer />);
     expect(

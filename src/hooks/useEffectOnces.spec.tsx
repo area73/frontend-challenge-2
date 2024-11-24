@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, test } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { useEffectOnce } from './useEffectOnces';
 
 describe('useEffectOnce', () => {
