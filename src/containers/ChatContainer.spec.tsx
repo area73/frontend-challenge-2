@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, type Mock } from 'vitest';
-import ChatContainer from './ChatContainer';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import ChatContainer, { type ChatMessage } from './ChatContainer';
 
 import Core from '@landbot/core';
 import type { ChatBoxProps } from '../components/ChatBox';
@@ -31,6 +31,37 @@ vi.mock('../components/ChatBox', () => ({
 }));
 
 describe('ChatContainer', () => {
+  let mockCoreInstance: Partial<Core>;
+
+  const setupCoreMock = (subscribeCallback?: (data: ChatMessage) => void) => {
+    mockCoreInstance = {
+      sendMessage: vi.fn(),
+      pipelines: {
+        $readableSequence: {
+          // @ts-expect-error: Mocking subscribe method
+          subscribe: vi.fn((callback) => {
+            subscribeCallback?.(callback);
+          }),
+        },
+      },
+      init: vi.fn(),
+    };
+    (Core as unknown as Mock).mockImplementation(() => mockCoreInstance);
+  };
+
+  const setupFetchMock = (response: unknown) => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(response),
+      } as Response)
+    );
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('renders ChatBox component', () => {
     render(<ChatContainer />);
     expect(
@@ -46,31 +77,17 @@ describe('ChatContainer', () => {
   });
 
   it('fetches and sets messages on mount', async () => {
-    const mockCoreInstance = {
-      sendMessage: vi.fn(),
-      pipelines: {
-        $readableSequence: {
-          subscribe: vi.fn((callback) => {
-            callback({
-              key: '3',
-              title: 'New message',
-              samurai: true,
-              timestamp: 1732367400,
-              type: 'text',
-            });
-          }),
-        },
-      },
-      init: vi.fn(),
-    };
-    (Core as unknown as Mock).mockImplementation(() => mockCoreInstance);
-
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({}),
-      } as Response)
+    setupCoreMock((callback) =>
+      // @ts-expect-error: Mocking callback
+      callback({
+        key: '3',
+        title: 'New message',
+        samurai: true,
+        timestamp: 1732367400,
+        type: 'text',
+      })
     );
+    setupFetchMock({});
 
     render(<ChatContainer />);
 
@@ -80,23 +97,8 @@ describe('ChatContainer', () => {
   });
 
   it('ensures fetch is called with the correct URL', async () => {
-    const mockCoreInstance = {
-      sendMessage: vi.fn(),
-      pipelines: {
-        $readableSequence: {
-          subscribe: vi.fn(),
-        },
-      },
-      init: vi.fn(),
-    };
-    (Core as unknown as Mock).mockImplementation(() => mockCoreInstance);
-
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({}),
-      } as Response)
-    );
+    setupCoreMock();
+    setupFetchMock({});
 
     render(<ChatContainer />);
 
