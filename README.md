@@ -1,126 +1,127 @@
-# Proyecto de Chat Interactivo
+# Interactive Chat Project
 
-Este proyecto implementa una aplicación de chat interactivo utilizando React, TypeScript y TailwindCSS.
+This project implements an interactive chat application using React, TypeScript, and TailwindCSS.
 
-El objetivo principal es proporcionar una arquitectura modular y escalable.
+The main goal is to provide a modular and scalable architecture.
 
-## Premisas
+## Premises
 
-- No se ha utilizado ninguna librería de componentes como Material-UI o Chakra-UI para demostrar la capacidad de implementar componentes personalizados y estilización con TailwindCSS.
+- No component library such as Material-UI or Chakra-UI has been used to demonstrate the ability to implement custom components and styling with TailwindCSS.
 
-- Se ha utilizado TypeScript para garantizar la consistencia y calidad del código.
+- TypeScript has been used to ensure code consistency and quality.
 
-- No se ha querido introducir una librería de estado como Redux o Recoil ya que no es necesaria y quería mantener la simplicidad del proyecto.
+- A state management library like Redux or Recoil has not been introduced as it is not necessary, and the aim was to keep the project simple.
 
-- No se ha usado axios o react query para las peticiones HTTP ya que no es necesario y se ha optado por fetch que es nativo en el navegador.
+- Axios or React Query has not been used for HTTP requests as it is unnecessary, and the native `fetch` API has been chosen instead.
 
-- Se ha usado una librería de animaciones como Framer Motion para añadir animaciones a la aplicación.
+- An animation library like Framer Motion has been used to add animations to the application.
 
-## Cómo arrancar el proyecto
+## How to Start the Project
 
-1. **Clonar el repositorio:**
+1. **Clone the repository:**
 
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd <NOMBRE_DEL_PROYECTO>
+   git clone <REPOSITORY_URL>
+   cd <PROJECT_NAME>
    ```
 
-2. **Instalar las dependencias:**
-   Asegúrate de tener Node.js instalado (versión 16 o superior).
+2. **Install dependencies:**
+   Ensure you have Node.js installed (version 16 or higher).
 
    ```bash
    npm install
    ```
 
-3. **Iniciar el entorno de desarrollo:**
+3. **Start the development environment:**
 
    ```bash
    npm run dev
    ```
 
-4. **Construir el proyecto para producción:**
+4. **Build the project for production:**
 
    ```bash
    npm run build
    ```
 
-5. **Ejecutar los tests:**
+5. **Run tests:**
+
    ```bash
    npm run test
    ```
 
-## Scripts disponibles
+## Available Scripts
 
-- `npm run dev`: Inicia el servidor de desarrollo.
-- `npm run build`: Genera una versión optimizada para producción.
-- `npm run test`: Ejecuta los tests unitarios con Vitest.
-- `npm run lint`: Analiza el código con ESLint para asegurar buenas prácticas.
-- `npm run preview`: Sirve la aplicación ya construida.
-- `npm run type-check`: Comprueba los tipos con TypeScript.
+- `npm run dev`: Starts the development server.
+- `npm run build`: Generates an optimized production build.
+- `npm run test`: Runs unit tests with Vitest.
+- `npm run lint`: Analyzes the code with ESLint to ensure best practices.
+- `npm run preview`: Serves the built application.
+- `npm run type-check`: Checks TypeScript types.
 
-## Estructura de carpetas
+## Folder Structure
 
-- `src/components`: Componentes reutilizables de la aplicación (como `ChatBox`, `Message`).
-- `src/containers`: Componentes de alto nivel que agrupan lógica de negocio y presentación.
-- `src/hooks`: Hooks personalizados para lógica compartida.
-- `src/services`: Lógica para interactuar con APIs externas.
-- `src/types`: Tipos y definiciones para TypeScript.
-- `public`: Recursos públicos como imágenes.
+- `src/components`: Reusable application components (e.g., `ChatBox`, `Message`).
+- `src/containers`: High-level components that group business logic and presentation.
+- `src/hooks`: Custom hooks for shared logic.
+- `src/services`: Logic to interact with external APIs.
+- `src/types`: TypeScript definitions.
+- `public`: Public assets like images.
 
-## Arquitectura
+## Architecture
 
-El proyecto sigue una arquitectura basada en **componentes modulares**:
+The project follows a **modular component-based architecture**:
 
-- Cada componente tiene su propio archivo de test para asegurar funcionalidad individual.
-- Los contenedores agrupan componentes y manejan la lógica principal de la aplicación.
-- Los hooks permiten reutilizar lógica entre diferentes componentes.
-- El servicio centraliza las interacciones con APIs externas para mantener la separación de responsabilidades.
+- Each component has its own test file to ensure individual functionality.
+- Containers group components and manage the main application logic.
+- Hooks allow logic reuse across different components.
+- The service centralizes interactions with external APIs to maintain separation of concerns.
 
-- Composición y Modularidad
-  La separación en directorios como components, containers, hooks, y services demuestra un enfoque claro hacia la modularidad.
+- **Composition and Modularity**
+  The separation into directories such as `components`, `containers`, `hooks`, and `services` demonstrates a clear focus on modularity.
 
-  Este enfoque facilita la reutilización de componentes, la prueba unitaria de lógica específica, la escalabilidad del proyecto y el mantenimiento del código al reducir el acoplamiento entre las partes y la reutilización componentes en diferentes contextos.
+  This approach facilitates component reuse, specific logic unit testing, project scalability, and code maintenance by reducing coupling between parts and enabling component reuse in different contexts.
 
-- Patrón Contenedor-Componente
+- **Container-Component Pattern**
 
-  La separación de responsabilidades entre `ChatContainer.tsx` y los componentes individuales como ChatBox y Message divide claramente la lógica de negocio de la representación visual, de tal forma que tendremos los contenedores (container) que gestionan la lógica de negocio, como la interacción con servicios y el manejo de estados, mientras que los componentes (components) se centran en la representación visual y reciben datos a través de props.
+  The separation of responsibilities between `ChatContainer.tsx` and individual components such as `ChatBox` and `Message` clearly divides business logic from visual representation. Containers manage business logic, such as service interactions and state handling, while components focus on visual representation and receive data through props.
 
-  - Mejora la legibilidad y reutilización del código.
-  - Simplifica las pruebas unitarias al separar la lógica de presentación de la lógica de negocio.
+  - Improves code readability and reuse.
+  - Simplifies unit testing by separating presentation logic from business logic.
 
-- Hooks Personalizados (Custom Hooks)
+- **Custom Hooks**
 
-  El archivo useEffectOnces.tsx encapsula lógica reutilizable que se podría repetir en varios lugares.
+  The file `useEffectOnces.tsx` encapsulates reusable logic that might otherwise be repeated in several places.
 
-  - Evita duplicación de código al centralizar comportamientos comunes.
-  - Mejora la abstracción de lógica compleja en aplicaciones React.
+  - Avoids code duplication by centralizing common behaviors.
+  - Improves abstraction of complex logic in React applications.
 
-- Patrón de Inversión de Dependencias
+- **Dependency Inversion Pattern**
 
-  El uso de un archivo de servicio (chatService.ts) centraliza las llamadas a APIs.
+  The use of a service file (`chatService.ts`) centralizes API calls.
 
-  - Facilita el testeo al permitir el mockeo de servicios en las pruebas.
-  - Desacopla los componentes y contenedores del detalle de las implementaciones del API.
+  - Facilitates testing by allowing services to be mocked in tests.
+  - Decouples components and containers from API implementation details.
 
-- Uso de Tipos de TypeScript
+- **Use of TypeScript Types**
 
-  He creado un directorio types donde centralizo las definiciones de tipos y así garantizar la consistencia en todo el proyecto.
+  A `types` directory centralizes type definitions, ensuring consistency throughout the project.
 
-  - Mejora la escalabilidad del proyecto y la detección de errores en tiempo de compilación.
-  - Facilita la colaboración al proveer definiciones claras para los datos y servicios.
+  - Enhances project scalability and error detection at compile time.
+  - Facilitates collaboration by providing clear definitions for data and services.
 
-## Buenas prácticas aplicadas
+## Best Practices Applied
 
-- **TypeScript**: Todo el proyecto utiliza tipos para prevenir errores en tiempo de compilación.
-- **Testing**: Tests unitarios para componentes, hooks y servicios utilizando Vitest.
-- **ESLint**: Configuración estricta para mantener calidad de código.
-- **TailwindCSS**: Estilización rápida y consistente sin necesidad de CSS adicionales.
-- **Modularidad**: Separación clara entre componentes, contenedores, y lógica de negocio.
+- **TypeScript:** The entire project uses types to prevent compile-time errors.
+- **Testing:** Unit tests for components, hooks, and services using Vitest.
+- **ESLint:** Strict configuration to maintain code quality.
+- **TailwindCSS:** Fast and consistent styling without additional CSS.
+- **Modularity:** Clear separation between components, containers, and business logic.
 
-## Mejoras futuras
+## Future Improvements
 
-- **Tests End-to-End (E2E):** Implementar pruebas E2E utilizando herramientas como Playwright o Cypress para validar flujos completos de usuario.
+- **End-to-End (E2E) Tests:** Implement E2E tests using tools like Playwright or Cypress to validate complete user flows.
 
-- **Regresión visual:** Añadir tests de regresión visual con herramientas como Percy , Chromatic o directamente usando librerías de tercero sin contar con un servicio de terceros para evitar errores en el diseño con cambios futuros.
+- **Visual Regression Testing:** Add visual regression tests with tools like Percy, Chromatic, or directly using third-party libraries without relying on external services to avoid design errors with future changes.
 
-- **Documentación ampliada:** Incluir ejemplos de uso para cada componente. Para esto podríamos añadir Storybook para documentar y visualizar componentes.
+- **Expanded Documentation:** Include usage examples for each component. For this, Storybook could be added to document and visualize components.
