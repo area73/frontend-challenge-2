@@ -5,6 +5,7 @@ import ChatContainer from './ChatContainer';
 
 import Core from '@landbot/core';
 import type { ChatBoxProps } from '../components/ChatBox';
+import { CHAT_CONFIG_URL } from '../services/chatService';
 
 vi.mock('@landbot/core');
 vi.mock('../components/ChatBox', () => ({
@@ -66,6 +67,7 @@ describe('ChatContainer', () => {
 
     global.fetch = vi.fn(() =>
       Promise.resolve({
+        ok: true,
         json: () => Promise.resolve({}),
       } as Response)
     );
@@ -75,5 +77,29 @@ describe('ChatContainer', () => {
     await waitFor(() => {
       expect(screen.getByText('New message')).toBeInTheDocument();
     });
+  });
+
+  it('ensures fetch is called with the correct URL', async () => {
+    const mockCoreInstance = {
+      sendMessage: vi.fn(),
+      pipelines: {
+        $readableSequence: {
+          subscribe: vi.fn(),
+        },
+      },
+      init: vi.fn(),
+    };
+    (Core as unknown as Mock).mockImplementation(() => mockCoreInstance);
+
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({}),
+      } as Response)
+    );
+
+    render(<ChatContainer />);
+
+    expect(global.fetch).toHaveBeenCalledWith(CHAT_CONFIG_URL);
   });
 });

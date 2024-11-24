@@ -3,6 +3,7 @@ import { ChatBox } from '../components/ChatBox';
 import Core from '@landbot/core';
 import type { Message } from 'postcss';
 import { useEffectOnce } from '../hooks/useEffectOnces';
+import { fetchChatConfig } from '../services/chatService';
 
 export interface ChatMessage {
   key: string;
@@ -18,18 +19,17 @@ const ChatContainer = () => {
   const core = useRef<Core | null>(null);
 
   useEffectOnce(() => {
-    const fetchConfig = async () => {
-      const response = await fetch(
-        'https://chats.landbot.io/u/H-441480-B0Q96FP58V53BJ2J/index.json'
-      );
-      const config = await response.json();
-      core.current = new Core(config);
-      core.current.pipelines.$readableSequence.subscribe((data: Message) => {
-        setMessages((prev) => [...prev, parseMessage(data)]);
-      });
-      await core.current.init();
+    const initializeChat = async () => {
+      try {
+        core.current = await fetchChatConfig();
+        core.current.pipelines.$readableSequence.subscribe((data: Message) => {
+          setMessages((prev) => [...prev, parseMessage(data)]);
+        });
+      } catch (error) {
+        console.error('Error initializing chat:', error);
+      }
     };
-    fetchConfig();
+    initializeChat();
   });
 
   const handleInputChange = (value: string) => {
