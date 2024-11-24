@@ -7,9 +7,12 @@ export const MessageList = ({ messages }: { messages: ChatMessage[] }) => {
       className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-700"
       role="list"
     >
-      {messages.map((msg) => (
-        <Message key={msg.key} text={msg.text} author={msg.author} />
-      ))}
+      {messages.map(
+        (msg) =>
+          msg.text && (
+            <Message key={msg.key} text={msg.text} author={msg.author} />
+          )
+      )}
     </div>
   );
 };

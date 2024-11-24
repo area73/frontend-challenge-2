@@ -7,7 +7,7 @@ export const Message = ({ text, author }: MessageProps) => {
       role="listitem"
       className={`${
         isBot ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'
-      } px-4 py-2 rounded-lg max-w-md ${isBot ? 'self-start' : 'self-end'}`}
+      } px-4 py-2 rounded-lg max-w-sm ${isBot ? 'self-start' : 'self-end ml-auto'}`}
     >
       {text}
     </div>
